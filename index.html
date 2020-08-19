@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fun Riddle Game</title>
+    <link rel="stylesheet" href="/style.css">
+
+</head>
+
+<body>
+    <audio id="correct-audio">
+        <source src="/assets/correct-audio.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="wrong-audio">
+        <source src="/assets/incorrect-audio.mp3" type="audio/mpeg">
+    </audio>
+
+    <h1 id="h1">Fun Riddle...!!!</h1><br>
+    <div class="score">
+        <h2>SCORE</h2><br>
+        <input type="text" placeholder="score" id="score-text">
+    </div>
+    <div class="QA">
+        <h3 id="question">What is CAT on ICE...?</h3><br>
+        <button id="option1" onclick="audio1()">Cool Cat</button>
+        <button id="option2">Dumb Cat</button>
+    </div>
+
+
+</body>
+<script src="/app.js" type="module"></script>
+
+</html>
