@@ -1,5 +1,5 @@
 function generateRandomColor() {
-  return '#' + Math.floor(Math.random() * 16777215).toString(16);
+  return "#" + Math.floor(Math.random() * 16777215).toString(16);
 }
 
 function changeTextColor() {
@@ -13,103 +13,85 @@ function checkBg() {
 setInterval(checkBg, 1000);
 
 (function () {
-  // Functions
   function buildQuiz() {
-    // variable to store the HTML output
     const output = [];
 
-    // for each question...
-    myQuestions.forEach(
-      (currentQuestion, questionNumber) => {
+    myQuestions.forEach((currentQuestion, questionNumber) => {
+      // to store the list of possible answers
+      const answers = [];
 
-        // variable to store the list of possible answers
-        const answers = [];
-
-        // and for each available answer...
-        for (letter in currentQuestion.answers) {
-
-          // ...add an HTML radio button
-          answers.push(
-            `<label>
+      for (letter in currentQuestion.answers) {
+        answers.push(
+          `<label>
               <input type="radio" name="question${questionNumber}" value="${letter}">
               ${letter} :
               ${currentQuestion.answers[letter]}
             </label>`
-          );
-        }
+        );
+      }
 
-        // add this question and its answers to the output
-        output.push(
-          `<div class="slide">
+      // add this question and its answers to the output
+      output.push(
+        `<div class="slide">
             <div class="question"> ${currentQuestion.question} </div>
             <div class="answers"> ${answers.join("")} </div>
           </div>`
-        );
-      }
-    );
+      );
+    });
 
-    // finally combine our output list into one string of HTML and put it on the page
-    quizContainer.innerHTML = output.join('');
+    // combine the list and adding it to HTML page
+    quizContainer.innerHTML = output.join("");
   }
 
-
-
-  const score = document.getElementById('score');
+  const score = document.getElementById("score");
 
   function showResults() {
+    const answerContainers = quizContainer.querySelectorAll(".answers");
 
-    // gather answer containers from our quiz
-    const answerContainers = quizContainer.querySelectorAll('.answers');
-
-    // keep track of user's answers
+    // keep track of user's answers and score
     let numCorrect = 0;
     let scores = 0;
 
-    // for each question...
     myQuestions.forEach((currentQuestion, questionNumber) => {
-
-      // find selected answer
+      // to find selected answer
       const answerContainer = answerContainers[questionNumber];
       const selector = `input[name=question${questionNumber}]:checked`;
       const userAnswer = (answerContainer.querySelector(selector) || {}).value;
 
       // if answer is correct
       if (userAnswer === currentQuestion.correctAnswer) {
-
         numCorrect++;
         scores += 50;
         score.innerHTML = scores;
-        answerContainers[questionNumber].style.color = 'lightgreen';
+        answerContainers[questionNumber].style.color = "lightgreen";
       }
       // if answer is wrong or blank
       else {
-
         scores -= 20;
         score.innerHTML = scores;
-        answerContainers[questionNumber].style.color = 'red';
-
+        answerContainers[questionNumber].style.color = "red";
       }
     });
 
-    // show number of correct answers out of total
+    //
     resultsContainer.innerHTML = `${numCorrect} out of ${myQuestions.length}`;
   }
 
   function showSlide(n) {
-    slides[currentSlide].classList.remove('active-slide');
-    slides[n].classList.add('active-slide');
+    slides[currentSlide].classList.remove("active-slide");
+    slides[n].classList.add("active-slide");
     currentSlide = n;
     if (currentSlide === 0) {
-      previousButton.style.display = 'none';
+      previousButton.style.display = "none";
     } else {
-      previousButton.style.display = 'inline-block';
+      previousButton.style.display = "inline-block";
     }
     if (currentSlide === slides.length - 1) {
-      nextButton.style.display = 'none';
-      submitButton.style.display = 'inline-block';
+      nextButton.style.display = "none";
+      submitButton.style.display = "inline-block";
     } else {
-      nextButton.style.display = 'inline-block';
-      submitButton.style.display = 'none';
+      nextButton.style.display = "inline-block";
+      submitButton.style.display = "none";
     }
   }
 
@@ -121,177 +103,176 @@ setInterval(checkBg, 1000);
     showSlide(currentSlide - 1);
   }
 
-  // Variables
-  const quizContainer = document.getElementById('quiz');
-  const resultsContainer = document.getElementById('results');
-  const submitButton = document.getElementById('submit');
+  const quizContainer = document.getElementById("quiz");
+  const resultsContainer = document.getElementById("results");
+  const submitButton = document.getElementById("submit");
 
-  const myQuestions = [{
+  const myQuestions = [
+    {
       question: "What kind of cup doesn't hold water?",
       answers: {
         a: "Tea Cup",
-        b: "Cup Cake"
+        b: "Cup Cake",
       },
-      correctAnswer: "b"
+      correctAnswer: "b",
     },
     {
       question: "Which side of a cat has the most fur?",
       answers: {
         a: "Outside",
-        b: "Tail"
+        b: "Tail",
       },
-      correctAnswer: "a"
+      correctAnswer: "a",
     },
     {
       question: "The shorter I am, the bigger I am. What am I?",
       answers: {
         a: "Anger",
-        b: "Love"
+        b: "Love",
       },
-      correctAnswer: "a"
+      correctAnswer: "a",
     },
 
     {
       question: "What is a Mummy's favorite type of music?",
       answers: {
         a: "Jazz",
-        b: "Wrap"
+        b: "Wrap",
       },
-      correctAnswer: "b"
+      correctAnswer: "b",
     },
     {
       question: "What can you catch but not throw?",
       answers: {
         a: "Cold",
-        b: "Foot Ball"
+        b: "Foot Ball",
       },
-      correctAnswer: "a"
+      correctAnswer: "a",
     },
     {
       question: "What do you get if you put a radio in the fridge?",
       answers: {
         a: "Broken Music",
-        b: "Cool Music"
+        b: "Cool Music",
       },
-      correctAnswer: "b"
+      correctAnswer: "b",
     },
     {
       question: "What gets broken without being hold?",
       answers: {
         a: "Promise",
-        b: "Plate"
+        b: "Plate",
       },
-      correctAnswer: "a"
+      correctAnswer: "a",
     },
     {
       question: "What type of house weighs the least?",
       answers: {
         a: "Light House",
-        b: "Small House"
+        b: "Small House",
       },
-      correctAnswer: "a"
+      correctAnswer: "a",
     },
     {
       question: "What kind of room doesn't have physical walls?",
       answers: {
         a: "Open Room",
-        b: "Chat Room"
+        b: "Chat Room",
       },
-      correctAnswer: "b"
+      correctAnswer: "b",
     },
     {
       question: "What kind of room has no doors or windows?",
       answers: {
         a: "Mushroom",
-        b: "Groom"
+        b: "Groom",
       },
-      correctAnswer: "a"
+      correctAnswer: "a",
     },
     {
       question: "What goes up and down without moving?",
       answers: {
         a: "Snail",
-        b: "Stairs"
+        b: "Stairs",
       },
-      correctAnswer: "b"
+      correctAnswer: "b",
     },
     {
       question: "What has a foot but no leg?",
       answers: {
         a: "Ruler",
-        b: "FootHill"
+        b: "FootHill",
       },
-      correctAnswer: "a"
+      correctAnswer: "a",
     },
     {
       question: "What kind of street does a ghost like best?",
       answers: {
         a: "Dead End",
-        b: "Ghost Street"
+        b: "Ghost Street",
       },
-      correctAnswer: "a"
+      correctAnswer: "a",
     },
     {
       question: "What has to be broken before you can use it?",
       answers: {
         a: "Fruit",
-        b: "Egg"
+        b: "Egg",
       },
-      correctAnswer: "b"
+      correctAnswer: "b",
     },
     {
       question: "Which bow can't be tied?",
       answers: {
         a: "Elbow",
-        b: "Rainbow"
+        b: "Rainbow",
       },
-      correctAnswer: "b"
+      correctAnswer: "b",
     },
     {
-      question: "I shave several times a day, yet I still have a beard. Who am I?",
+      question:
+        "I shave several times a day, yet I still have a beard. Who am I?",
       answers: {
         a: "Beard",
-        b: "Barber"
+        b: "Barber",
       },
-      correctAnswer: "b"
+      correctAnswer: "b",
     },
     {
       question: "I give milk and have a horn but I'm not a cow. Who am I?",
       answers: {
         a: "Milk Truck",
-        b: "Milk Man"
+        b: "Milk Man",
       },
-      correctAnswer: "a"
+      correctAnswer: "a",
     },
     {
       question: "What do you call two witches who live together?",
       answers: {
         a: "Classmates",
-        b: "Broomates"
+        b: "Broomates",
       },
-      correctAnswer: "b"
+      correctAnswer: "b",
     },
     {
       question: "What is never eaten before lunch?",
       answers: {
         a: "Breakfast",
-        b: "Dinner"
+        b: "Dinner",
       },
-      correctAnswer: "b"
+      correctAnswer: "b",
     },
     {
       question: "What is the largest living ant on earth?",
       answers: {
         a: "Elephant",
-        b: "Restaurant"
+        b: "Restaurant",
       },
-      correctAnswer: "a"
-    }
-
+      correctAnswer: "a",
+    },
   ];
 
   buildQuiz();
-
 
   const previousButton = document.getElementById("previous");
   const nextButton = document.getElementById("next");
@@ -302,7 +283,7 @@ setInterval(checkBg, 1000);
   showSlide(currentSlide);
 
   // Event listeners
-  submitButton.addEventListener('click', showResults);
+  submitButton.addEventListener("click", showResults);
   previousButton.addEventListener("click", showPreviousSlide);
   nextButton.addEventListener("click", showNextSlide);
 })();
